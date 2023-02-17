@@ -7,8 +7,6 @@ import { ProductProvider } from "../context/product-context"
 import "../fonts/index.css"
 import theme from "../theme"
 
-const BACKEND_URL =
-  process.env.NEXT_PUBLIC_MEDUSA_BACKEND_URL || "http://localhost:9000"
 
 // Your react-query's query client config
 const queryClient = new QueryClient({
@@ -25,7 +23,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <ThemeProvider theme={theme}>
       <MedusaProvider
-        baseUrl={BACKEND_URL}
+        baseUrl={process.env.BACKEND_URL}
         queryClientProviderProps={{ client: queryClient }}
       >
         <CartProvider>
