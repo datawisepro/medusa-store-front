@@ -13,7 +13,7 @@ const IndexPage = ({ product }) => {
   return (
     <main>
       <Head>
-        <title>Medusa Express</title>
+        <title>Medusa</title>
         <meta name="description" content="One-page checkout" />
       </Head>
       <Layout>
@@ -39,7 +39,7 @@ const IndexPage = ({ product }) => {
               Medusa Express is a drop-in storefront for your{" "}
               <a href="https://github.com/medusajs/medusa" target={"_blank"}>
                 Medusa
-              </a>{" "}
+              </a>
               store, that automatically creates pages for the products in your
               catalog, each of them optimized to make the purchasing experience
               as frictionless as possible, by bundling the checkout flow
