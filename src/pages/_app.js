@@ -7,7 +7,6 @@ import { ProductProvider } from "../context/product-context"
 import "../fonts/index.css"
 import theme from "../theme"
 
-
 // Your react-query's query client config
 const queryClient = new QueryClient({
   defaultOptions: {
