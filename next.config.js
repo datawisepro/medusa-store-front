@@ -1,5 +1,5 @@
 module.exports = {
   images: {
-    domains: ["images.unsplash.com"],
+    domains: ["medusa-public-images.s3.eu-west-1.amazonaws.com"],
   },
 }

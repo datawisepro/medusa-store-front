@@ -5,6 +5,7 @@ import { QueryClient } from "react-query"
 import { ThemeProvider } from "theme-ui"
 import { ProductProvider } from "../context/product-context"
 import "../fonts/index.css"
+import "../styles/global.css"
 import theme from "../theme"
 
 // Your react-query's query client config
