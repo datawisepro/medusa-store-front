@@ -8,15 +8,15 @@ const Layout = ({ children, country, regions, handleRegionChange }) => {
     <Flex
       sx={{
         width: "100%",
-        // flexDirection: "column",
+        flexDirection: "column",
         alignItems: "center",
-        // justifyContent: "center",
+        justifyContent: "center",
         backgroundColor: "#F3F4F6",
       }}
     >
       <Flex
         sx={{
-          // justifyContent: ["center", "flex-end"],
+          justifyContent: ["center", "flex-end"],
           border: "200px solid red",
           alignItems: "center",
           width: ["100%", "50%"],
