@@ -22,7 +22,7 @@ function IndexPage({ products }) {
             <Link href={`/products/${product.id}`} key={product.id}>
               <div className="card">
                 <img src={product.thumbnail} alt={product.name} />
-                <h2>{product.name}</h2>
+                <h2>{product.title}</h2>
                 <p>{product.description}</p>
               </div>
             </Link>
