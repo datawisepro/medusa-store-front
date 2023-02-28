@@ -49,7 +49,7 @@ export default function Product({ product }) {
   )
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths = async () => {
   //fetch external paths
   const res = await fetch(`${baseUrl}/store/products`)
   const products = await res.json()
@@ -58,16 +58,12 @@ export async function getStaticPaths() {
     params: { id: product.id },
   }))
 
-  return { paths, fallback: true }
+  return { paths, fallback: false }
 }
 
-export async function getStaticProps({ params }) {
-  try {
-    const res = await fetch(`${baseUrl}/store/products/${params.id}`)
-    const product = await res.json()
+export const getStaticProps = async ({ params }) => {
+  const res = await fetch(`${baseUrl}/store/products/${params.id}`)
+  const product = await res.json()
 
-    return { props: { product } }
-  } catch (error) {
-    console.error(error)
-  }
+  return { props: { product } }
 }
