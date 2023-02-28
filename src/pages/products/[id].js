@@ -1,44 +1,6 @@
-import Image from "next/image"
-import { useRouter } from "next/router"
-import { useState, useEffect } from "react"
 import { baseUrl } from "../../utils/client"
 
-export default function Product() {
-  const router = useRouter()
-  const { id } = router.query
-
-  const [product, setProduct] = useState(null)
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    const fetchProduct = async () => {
-      setLoading(true)
-
-      try {
-        const res = await fetch(`${baseUrl}/store/products/${id}`)
-        const data = await res.json()
-        console.log("data-effect:", data)
-        setProduct(data.product)
-        setLoading(false)
-      } catch (error) {
-        console.error(error)
-        setLoading(false)
-      }
-    }
-
-    fetchProduct()
-  }, [id])
-
-  if (loading) {
-    return <p>Loading...</p>
-  }
-
-  if (!product) {
-    return <p>Product not found.</p>
-  }
-  console.log("id", product)
-  console.log("product:", product)
-
+export default function Product({ product }) {
   return (
     <div className="product-container">
       <h1 className="product-title">{product.title}</h1>
@@ -85,4 +47,27 @@ export default function Product() {
       `}</style>
     </div>
   )
+}
+
+export async function getStaticPaths() {
+  //fetch external paths
+  const res = await fetch(`${baseUrl}/store/products`)
+  const products = await res.json()
+
+  const paths = products.map(product => ({
+    params: { id: product.id },
+  }))
+
+  return { paths, fallback: true }
+}
+
+export async function getStaticProps({ params }) {
+  try {
+    const res = await fetch(`${baseUrl}/store/products/${params.id}`)
+    const product = await res.json()
+
+    return { props: { product } }
+  } catch (error) {
+    console.error(error)
+  }
 }

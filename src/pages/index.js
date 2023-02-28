@@ -1,34 +1,24 @@
 import Link from "next/link"
 import fetch from "isomorphic-unfetch"
-import { useState, useEffect } from "react"
 
 import "../styles/index.module.scss"
 import { baseUrl } from "../utils/client"
 function IndexPage({ products }) {
-  const [loading, setLoading] = useState(false)
-
-  useEffect(() => {
-    setLoading(false)
-  }, [products])
-
   return (
     <div className="products-page">
       <h1>Products</h1>
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        <div className="grid">
-          {products.map(product => (
-            <Link href={`/products/${product.id}`} key={product.id}>
-              <div className="card">
-                <img src={product.thumbnail} alt={product.name} />
-                <h2>{product.title}</h2>
-                <p>{product.description}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      )}
+
+      <div className="grid">
+        {products.map(product => (
+          <Link href={`/products/${product.id}`} key={product.id}>
+            <div className="card">
+              <img src={product.thumbnail} alt={product.name} />
+              <h2>{product.title}</h2>
+              <p>{product.description}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
 
       <style jsx>{`
         h1 {
@@ -72,11 +62,11 @@ function IndexPage({ products }) {
   )
 }
 
-IndexPage.getInitialProps = async () => {
+export async function getStaticProps() {
   const res = await fetch(`${baseUrl}/store/products`)
-  const data = await res.json()
+  const products = await res.json()
 
-  return { products: data.products }
+  return { props: { products } }
 }
 
 export default IndexPage
