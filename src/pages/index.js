@@ -62,7 +62,7 @@ function IndexPage({ products }) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const res = await fetch(`${baseUrl}/store/products`)
   const products = await res.json()
 
