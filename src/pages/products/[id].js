@@ -49,20 +49,10 @@ export default function Product({ product }) {
   )
 }
 
-export const getStaticPaths = async () => {
-  //fetch external paths
-  const res = await fetch(`${baseUrl}/store/products`)
-  const products = await res.json()
+export const getServerSideProps = async ctx => {
+  const { id } = ctx.params
 
-  const paths = products.map(product => ({
-    params: { id: product.id },
-  }))
-
-  return { paths, fallback: false }
-}
-
-export const getStaticProps = async ({ params }) => {
-  const res = await fetch(`${baseUrl}/store/products/${params.id}`)
+  const res = await fetch(`${baseUrl}/store/products/${id}`)
   const product = await res.json()
 
   return { props: { product } }
